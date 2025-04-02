@@ -1,7 +1,10 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-schedule',
+  imports: [FormsModule, NgFor],
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.css']
 })
