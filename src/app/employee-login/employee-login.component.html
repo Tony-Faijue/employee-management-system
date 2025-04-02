@@ -1,14 +1,27 @@
-<h1>Employee Login</h1>
-<form (ngSubmit)="onLogin()">
-  <div>
+<h1>Welcome to the employee-login Dashboard</h1>
+
+<!-- Login Form -->
+<div class="login-container" *ngIf="!isLoggedIn">
+  <h2>Admin Login</h2>
+  <form (ngSubmit)="login()">
     <label for="username">Username:</label>
-    <input type="text" id="username" [(ngModel)]="username" name="username" required>
-  </div>
+    <input id="username" type="text" [(ngModel)]="username" required>
 
-  <div>
     <label for="password">Password:</label>
-    <input type="password" id="password" [(ngModel)]="password" name="password" required>
-  </div>
+    <input id="password" type="password" [(ngModel)]="password" required>
 
-  <button type="submit">Login</button>
-</form>
+    <button type="submit">Login</button>
+  </form>
+</div>
+
+<!-- Employee Menu Dashboard Navigation -->
+<div *ngIf="isLoggedIn">
+  <nav>
+    <ul>
+      <li><a routerLink="/employee-info">Employee Information</a></li>
+      <li><a routerLink="/pay-stub">Pay Stub</a></li>
+      <li><a routerLink="/schedule">Employee Schedule</a></li>
+    </ul>
+  </nav>
+  <button (click)="logout()">Logout</button>
+</div>

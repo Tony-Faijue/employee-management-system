@@ -7,6 +7,8 @@ interface Employee {
   id: number;
   name: string;
   address: string;
+  phone: string;
+  email: string;
   maritalStatus: string;
   position: string;
   resume?: File;
@@ -25,6 +27,8 @@ export class EmployeeInfoComponent {
     id: 1,
     name: 'John Doe',
     address: '123 Main St, Cityville',
+    phone: '701-456-4089',
+    email: 'john@example.com', // ✅ Fixed the email format
     maritalStatus: 'Single',
     position: 'Software Developer',
     skills: ['JavaScript', 'Angular']
@@ -35,6 +39,8 @@ export class EmployeeInfoComponent {
     this.employeeForm = this.fb.group({
       name: [this.employee.name, Validators.required],
       address: [this.employee.address, Validators.required],
+      phone: [this.employee.phone, [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      email: [this.employee.email, [Validators.required, Validators.email]],
       maritalStatus: [this.employee.maritalStatus, Validators.required],
       position: [this.employee.position, Validators.required],
       skills: ['']

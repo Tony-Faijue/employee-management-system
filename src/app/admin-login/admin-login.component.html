@@ -1,10 +1,27 @@
 <h1>Welcome to the Admin Dashboard</h1>
-<nav>
-  <ul>
-    <li><a routerLink="/employee-info">Employee Information</a></li>
-    <li><a routerLink="/pay-stub">Pay Stub</a></li>
-    <li><a routerLink="/schedule">Employee Schedule</a></li>
-  </ul>
-</nav>
 
-<button (click)="logout()">Logout</button>
+<!-- Login Form -->
+<div class="login-container" *ngIf="!isLoggedIn">
+  <h2>Admin Login</h2>
+  <form (ngSubmit)="login()">
+    <label for="username">Username:</label>
+    <input id="username" type="text" [(ngModel)]="username" required>
+
+    <label for="password">Password:</label>
+    <input id="password" type="password" [(ngModel)]="password" required>
+
+    <button type="submit">Login</button>
+  </form>
+</div>
+
+<!-- Admin Dashboard Navigation -->
+<div *ngIf="isLoggedIn">
+  <nav>
+    <ul>
+      <li><a routerLink="/employee-info">Employee Information</a></li>
+      <li><a routerLink="/pay-stub">Pay Stub</a></li>
+      <li><a routerLink="/schedule">Employee Schedule</a></li>
+    </ul>
+  </nav>
+  <button (click)="logout()">Logout</button>
+</div>

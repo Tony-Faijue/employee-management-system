@@ -1,26 +1,30 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-employee-login',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink, NgIf, NgFor],
   templateUrl: './employee-login.component.html',
   styleUrls: ['./employee-login.component.css']
 })
 
-export class LoginComponent {
-  username = '';
-  password = '';
-
+export class employeeLoginComponent {
+username: any;
+password: any;
   constructor(private router: Router) {}
 
-  onLogin() {
-    // Simple authentication logic (can be replaced with real service calls)
-    if (this.username === 'admin' && this.password === 'password') {
-      this.router.navigate(['/admin']);
-    } else {
-      alert('Invalid username or password!');
-    }
+  isLoggedIn: boolean = false; // ✅ Define isLoggedIn
+
+  login(): void {
+    // Sample logic for authentication
+    this.isLoggedIn = true; // Change state on successful login
+    alert('Login successful!');
   }
+
+  logout(): void {
+    this.isLoggedIn = false; // Change state on logout
+  }
+
 }

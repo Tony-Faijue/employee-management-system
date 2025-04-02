@@ -9,6 +9,12 @@
       <label for="address">Address:</label>
       <input id="address" type="text" formControlName="address">
   
+      <label for="phone">Phone:</label>
+      <input id="phone" type="text" formControlName="phone" placeholder="Enter 10-digit phone number">
+  
+      <label for="email">Email:</label>
+      <input id="email" type="email" formControlName="email" placeholder="example@domain.com">
+  
       <label for="maritalStatus">Marital Status:</label>
       <select id="maritalStatus" formControlName="maritalStatus">
         <option value="Single">Single</option>
@@ -32,8 +38,10 @@
           <button type="button" (click)="removeSkill(skill)">❌</button>
         </li>
       </ul>
+  
       <a routerLink="/employee-info">Employee Info</a>
       <router-outlet></router-outlet>
+  
       <button type="submit">Save</button>
     </form>
   </div>
