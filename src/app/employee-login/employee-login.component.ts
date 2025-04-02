@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-employee-login',
   imports: [FormsModule],
   templateUrl: './employee-login.component.html',
   styleUrls: ['./employee-login.component.css']

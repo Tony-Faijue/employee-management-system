@@ -1,1 +1,39 @@
-<p>employee-info works!</p>
+<div class="employee-container">
+    <h2>Employee Information</h2>
+  
+    <form [formGroup]="employeeForm" (ngSubmit)="saveEmployee()">
+      
+      <label for="name">Name:</label>
+      <input id="name" type="text" formControlName="name">
+  
+      <label for="address">Address:</label>
+      <input id="address" type="text" formControlName="address">
+  
+      <label for="maritalStatus">Marital Status:</label>
+      <select id="maritalStatus" formControlName="maritalStatus">
+        <option value="Single">Single</option>
+        <option value="Married">Married</option>
+        <option value="Divorced">Divorced</option>
+      </select>
+  
+      <label for="position">Position:</label>
+      <input id="position" type="text" formControlName="position">
+  
+      <label for="resume">Upload Resume:</label>
+      <input id="resume" type="file" (change)="handleFileInput($event)">
+  
+      <label for="skills">Skills:</label>
+      <input id="skills" type="text" formControlName="skills" #skillInput>
+      <button type="button" (click)="addSkill(skillInput.value)">Add Skill</button>
+  
+      <ul>
+        <li *ngFor="let skill of employee.skills">
+          {{ skill }} 
+          <button type="button" (click)="removeSkill(skill)">❌</button>
+        </li>
+      </ul>
+      <a routerLink="/employee-info">Employee Info</a>
+      <router-outlet></router-outlet>
+      <button type="submit">Save</button>
+    </form>
+  </div>
