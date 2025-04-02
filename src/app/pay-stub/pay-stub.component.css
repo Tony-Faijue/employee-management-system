@@ -1,0 +1,25 @@
+/* Styling for the Pay Stub Page */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .pay-stub {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .pay-stub p {
+    margin: 10px 0;
+    font-size: 16px;
+  }
+  
+  hr {
+    margin: 15px 0;
+    border: none;
+    border-top: 1px solid #ccc;
+  }

@@ -1,0 +1,15 @@
+<h1>Employee Schedule</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Day</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let entry of schedule">
+      <td>{{ entry.day }}</td>
+      <td>{{ entry.time }}</td>
+    </tr>
+  </tbody>
+</table>
