@@ -1,14 +1,14 @@
-<h1>Welcome to the employee-login Dashboard</h1>
+<h1>Welcome to the Employee-Login Dashboard</h1>
 
 <!-- Login Form -->
 <div class="login-container" *ngIf="!isLoggedIn">
   <h2>Admin Login</h2>
   <form (ngSubmit)="login()">
     <label for="username">Username:</label>
-    <input id="username" type="text" [(ngModel)]="username" required>
+    <input id="username" type="text" [(ngModel)]="username" name="username" required>
 
     <label for="password">Password:</label>
-    <input id="password" type="password" [(ngModel)]="password" required>
+    <input id="password" type="password" [(ngModel)]="password" name="password" required>
 
     <button type="submit">Login</button>
   </form>
