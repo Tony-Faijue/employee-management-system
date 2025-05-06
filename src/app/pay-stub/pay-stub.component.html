@@ -1,12 +1,75 @@
-<h1>Employee Pay Stub</h1>
 <div class="pay-stub">
-  <p><strong>Employee Name:</strong> {{ payStub.employeeName }}</p>
-  <p><strong>Position:</strong> {{ payStub.position }}</p>
-  <p><strong>Pay Period:</strong> {{ payStub.payPeriod }}</p>
-  <hr>
-  <p><strong>Gross Pay:</strong> ${{ payStub.grossPay }}</p>
-  <p><strong>Taxes:</strong> ${{ payStub.taxes }}</p>
-  <p><strong>Deductions:</strong> ${{ payStub.deductions }}</p>
-  <hr>
-  <p><strong>Net Pay:</strong> ${{ payStub.netPay }}</p>
+  <div class="sidebar">
+    <button class="sidebar-button recent-pay">Recent Pay</button>
+    <button class="sidebar-button view-pay-history">View Pay History</button>
+    <button class="sidebar-button salary-information">Salary Information</button>
+  </div>
+  <div class="main-content">
+    <h1>Pay Stub</h1>
+    <h2>Week of 3/23 - 3/29</h2>
+    <div class="employee-info">
+      <h3>Employee Information</h3>
+      <p>Employee Name:</p>
+      <p>Employee ID:</p>
+      <p>Department:</p>
+      <p>Position:</p>
+    </div>
+    <div class="earnings">
+      <h3>Earnings</h3>
+      <table>
+        <tr>
+          <th>Wage Type</th>
+          <th>Hours</th>
+          <th>Rate</th>
+          <th>Amount</th>
+        </tr>
+        <tr>
+          <td>Regular Hours Worked</td>
+          <td>40.00</td>
+          <td>$20.00</td>
+          <td>$800.00</td>
+        </tr>
+        <tr>
+          <td>Overtime Hours</td>
+          <td>8.00</td>
+          <td>$30.00</td>
+          <td>$240.00</td>
+        </tr>
+      </table>
+      <p>Gross Pay: $1,040.00</p>
+    </div>
+    <div class="deductions">
+      <h3>Deductions</h3>
+      <table>
+        <tr>
+          <th>Standard Deductions</th>
+          <th>Amount</th>
+        </tr>
+        <tr>
+          <td>Federal Tax</td>
+          <td>$5.00</td>
+        </tr>
+        <tr>
+          <td>State Tax</td>
+          <td>$10.00</td>
+        </tr>
+        <tr>
+          <td>Social Security</td>
+          <td>$15.00</td>
+        </tr>
+        <tr>
+          <td>Health Insurance</td>
+          <td>$36.00</td>
+        </tr>
+        <tr>
+          <td>Loans</td>
+          <td>$25.00</td>
+        </tr>
+      </table>
+    </div>
+    <div class="net-pay">
+      <h3>Net Pay</h3>
+      <p>$949.00</p>
+    </div>
+  </div>
 </div>

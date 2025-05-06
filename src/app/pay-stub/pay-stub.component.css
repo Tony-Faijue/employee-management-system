@@ -1,25 +1,35 @@
-/* Styling for the Pay Stub Page */
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .pay-stub {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-  }
-  
-  .pay-stub p {
-    margin: 10px 0;
-    font-size: 16px;
-  }
-  
-  hr {
-    margin: 15px 0;
-    border: none;
-    border-top: 1px solid #ccc;
-  }
+.pay-stub {
+  display: flex;
+  flex-direction: row;
+  background-color: #d3d3d3;
+  padding: 20px;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+}
+
+.sidebar-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.main-content {
+  flex-grow: 1;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 8px;
+}
