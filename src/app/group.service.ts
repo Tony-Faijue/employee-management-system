@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import {collection, collectionData, doc, Firestore, setDoc, deleteDoc, updateDoc} from '@angular/fire/firestore';
+import {collection, collectionData, doc, query, where, docData, Firestore, setDoc, deleteDoc, updateDoc} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 
 export interface Group{
@@ -23,20 +23,30 @@ export class GroupService {
         return collectionData(this.groupsCollection, ({idField: 'id'})) as Observable<Group[]>
       }
 
-  addGroup(newGroup: Group){
+  getGroupById(id: string): Observable<Group>{
+    const groupRef = doc(this.firestore, 'groups', id);
+    return docData(groupRef, {idField: 'id'}) as Observable<Group>;
+  }
+
+  getGroupsByCompanyId(id: string): Observable<Group[]>{
+    const q = query(this.groupsCollection, where("companyid", "==", id));
+    return collectionData(q, {idField: 'id'}) as Observable<Group[]>;
+  }
+      
+  addGroup(newGroup: Group): Promise<void>{
       const groupRef = doc(this.groupsCollection);
       newGroup.id = groupRef.id;
-      setDoc(groupRef, newGroup);
+      return setDoc(groupRef, newGroup);
     }
 
-    updateGroup(group:Group){
+    updateGroup(group:Group): Promise<void>{
       const groupRef = doc(this.firestore, `groups/${group.id}`);
-      updateDoc(groupRef, { ... group});
+     return updateDoc(groupRef, { ... group});
     }
     
-    deleteGroup(id:string){
+    deleteGroup(id:string): Promise<void>{
       const groupRef = doc(this.firestore, `groups/${id}`);
-      deleteDoc(groupRef);
+     return deleteDoc(groupRef);
     } 
 
 

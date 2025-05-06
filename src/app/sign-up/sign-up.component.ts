@@ -1,13 +1,13 @@
 import { Component, inject } from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {RouterOutlet} from '@angular/router';
+import {RouterOutlet, RouterLink} from '@angular/router';
 import { Employee, UserService } from '../user.service';
 import{subscribe} from '@angular/fire/data-connect';
 
 
 @Component({
   selector: 'app-sign-up',
-  imports: [RouterOutlet, FormsModule],
+  imports: [RouterOutlet, RouterLink, FormsModule],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css'
 })

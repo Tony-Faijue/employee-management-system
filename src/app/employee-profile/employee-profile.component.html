@@ -1,0 +1,64 @@
+<!--Navbar-->
+
+<div class="container">
+  <nav class="navbar navbar-expand-LG navbar-success bg-success">
+    <div class="container-fluid">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/employee-profile', user.id]"
+              >My Employee Profile</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/employee-profile', user.id]"
+              >My Company</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/employee-profile', user.id]"
+              >My Groups</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/employee-profile', user.id]"
+              >My Projects</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/employee-profile', user.id]"
+              >My Tasks</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div class="container my-3">
+  <div class="row my-3">
+    <div class="card text-bg-white p-5">
+      <h1 class="card-title">UserID: {{ user.id }}</h1>
+      <div class="card-body">
+        <p>Username: {{ user.username }}</p>
+        <p>First Name: {{ user.firstname }}</p>
+        <p>Last Name: {{ user.lastname }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Phone Number: {{ user.phonenum }}</p>
+        <p>Address: {{ user.address }}</p>
+        <p>Role: {{ user.userrole }}</p>
+      </div>
+    </div>
+  </div>
+</div>

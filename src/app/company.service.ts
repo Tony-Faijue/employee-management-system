@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import {collection, collectionData, doc, Firestore, setDoc, deleteDoc, updateDoc} from '@angular/fire/firestore';
+import {collection, collectionData, doc, docData, Firestore, setDoc, deleteDoc, updateDoc} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 
 
@@ -23,20 +23,27 @@ export class CompanyService {
       return collectionData(this.companiesCollection, ({idField: 'id'})) as Observable<Company[]>
     }
 
-  addCompany(newCompany: Company){
-      const companyRef = doc(this.companiesCollection);
+    getCompanyById(id: string): Observable<Company> {
+      const companyRef = doc(this.firestore, 'companies', id);
+      return docData(companyRef, { idField: 'id' }) as Observable<Company>;
+    }
+  
+    // Return a Promise so you can chain .then() on the add operation.
+    addCompany(newCompany: Company): Promise<void> {
+      const companyRef = doc(this.companiesCollection); // creates a new document reference
       newCompany.id = companyRef.id;
-      setDoc(companyRef, newCompany);
+      return setDoc(companyRef, newCompany);
     }
-
-    updateCompany(company:Company){
-      const companyRef = doc(this.firestore, `companies/${company.id}`);
-      updateDoc(companyRef, { ... company});
+  
+    // Return a Promise from updateDoc.
+    updateCompany(company: Company): Promise<void> {
+      const companyRef = doc(this.firestore, 'companies', company.id);
+      return updateDoc(companyRef, { ...company });
     }
-    
-    deleteCompany(id:string){
-      const companyRef = doc(this.firestore, `companies/${id}`);
-      deleteDoc(companyRef);
-    }    
-
+  
+    // Return a Promise from deleteDoc.
+    deleteCompany(id: string): Promise<void> {
+      const companyRef = doc(this.firestore, 'companies', id);
+      return deleteDoc(companyRef);
+    }
 }

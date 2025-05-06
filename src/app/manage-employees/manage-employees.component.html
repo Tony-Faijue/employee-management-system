@@ -1,0 +1,192 @@
+<!--NavBar-->
+
+<div class="container">
+  <nav class="navbar navbar-expand-LG navbar-dark bg-dark">
+    <div class="container-fluid">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/admin-profile', currentUser.id]"
+              >My Admin Profile</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/manage-company', currentUser.id]"
+              >Manage the Company</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/manage-groups', currentUser.id]"
+              >Manage Company Groups</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/manage-project', currentUser.id]"
+              >Manage Group Projects</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/manage-tasks', currentUser.id]"
+              >Manage Project Tasks</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/manage-employees', currentUser.id]"
+              >Manage Company Employees</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div class="container my-5">
+  <h1 class="text-center">Manage Employees</h1>
+
+  <!-- Employees List -->
+
+  <div>
+    @if(employees && employees.length > 0){
+    <h2>Employees List</h2>
+    @for(employee of employees; track employee.id){
+    <div class="card p-3 mb-3">
+      <p>
+        <strong>#{{ $index + 1 }}</strong>
+      </p>
+      <p><strong>Username:</strong> {{ employee.username }}</p>
+      <p>
+        <strong>Name:</strong> {{ employee.firstname }} {{ employee.lastname }}
+      </p>
+      <p><strong>Email:</strong> {{ employee.email }}</p>
+      <p><strong>Phone:</strong> {{ employee.phonenum }}</p>
+      <p><strong>Address:</strong> {{ employee.address }}</p>
+
+      <button
+        class="btn btn-warning me-2"
+        (click)="setSelectedEmployee(employee)"
+      >
+        Edit
+      </button>
+      <button class="btn btn-danger" (click)="deleteEmployee(employee.id)">
+        Delete
+      </button>
+    </div>
+    }} @else{
+    <p>No employees workers found for this company.</p>
+    }
+  </div>
+  <hr />
+
+  <!-- Employee Form Section -->
+  <!-- If a selectedEmployee exists (i.e. we have an employee ID), show "Update" mode; otherwise show "Add" mode. -->
+
+  @if(selectedEmployee && selectedEmployee.id){
+  <h2>Update Employee</h2>
+  <form (ngSubmit)="updateEmployee()">
+    <div class="form-group mb-2">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        [(ngModel)]="selectedEmployee.username"
+        name="username"
+        class="form-control"
+        required
+      />
+    </div>
+    <div class="form-group mb-2">
+      <label for="firstname">First Name</label>
+      <input
+        type="text"
+        id="firstname"
+        [(ngModel)]="selectedEmployee.firstname"
+        name="firstname"
+        class="form-control"
+        required
+      />
+    </div>
+    <div class="form-group mb-2">
+      <label for="lastname">Last Name</label>
+      <input
+        type="text"
+        id="lastname"
+        [(ngModel)]="selectedEmployee.lastname"
+        name="lastname"
+        class="form-control"
+        required
+      />
+    </div>
+    <div class="form-group mb-2">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        [(ngModel)]="selectedEmployee.email"
+        name="email"
+        class="form-control"
+        required
+      />
+    </div>
+    <div class="form-group mb-2">
+      <label for="phonenum">Phone Number</label>
+      <input
+        type="text"
+        id="phonenum"
+        [(ngModel)]="selectedEmployee.phonenum"
+        name="phonenum"
+        class="form-control"
+        required
+      />
+    </div>
+    <div class="form-group mb-2">
+      <label for="address">Address</label>
+      <input
+        type="text"
+        id="address"
+        [(ngModel)]="selectedEmployee.address"
+        name="address"
+        class="form-control"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Update Employee</button>
+  </form>
+  }
+
+  <!-- Admin and Employees List -->
+  <div>
+    @if(adminAndemp && adminAndemp.length > 0){
+    <h2>Admin and Employees List</h2>
+    @for(adminemp of adminAndemp; track adminemp.id){
+    <div class="card p-3 mb-3">
+      <p>
+        <strong>#{{ $index + 1 }}</strong>
+      </p>
+      <p><strong>ID:</strong> {{ adminemp.id }}</p>
+      <p><strong>Username:</strong> {{ adminemp.username }}</p>
+      <p>
+        <strong>Name:</strong> {{ adminemp.firstname }} {{ adminemp.lastname }}
+      </p>
+      <p><strong>Email:</strong> {{ adminemp.email }}</p>
+      <p><strong>Phone:</strong> {{ adminemp.phonenum }}</p>
+      <p><strong>Address:</strong> {{ adminemp.address }}</p>
+      <p><strong>Role:</strong> {{ adminemp.userrole }}</p>
+    </div>
+    } } @else{
+    <p>No employees or admin found for this company.</p>
+    }
+  </div>
+</div>

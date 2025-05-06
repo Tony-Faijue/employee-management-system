@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import {collection, collectionData, doc, Firestore, setDoc, deleteDoc, updateDoc} from '@angular/fire/firestore';
+import {collection, collectionData, doc, query, where, docData, Firestore, setDoc, deleteDoc, updateDoc} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 
 export interface Project{
@@ -23,20 +23,27 @@ export class ProjectService {
         return collectionData(this.projectsCollection, ({idField: 'id'})) as Observable<Project[]>
       }
   
-  addProject(newProject: Project){
+
+  getProjectsByGroupIds (groupIds: string[]): Observable<Project[]>{
+    // up to 10 values 
+    const q = query(this.projectsCollection, where('groupid', 'in', groupIds));
+    return collectionData(q, {idField: 'id'}) as Observable<Project[]>;
+  }
+  
+  addProject(newProject: Project): Promise<void>{
       const projectRef = doc(this.projectsCollection);
       newProject.id = projectRef.id;
-      setDoc(projectRef, newProject);
+      return setDoc(projectRef, newProject);
     }
 
-    updateProject(project:Project){
+    updateProject(project:Project): Promise<void>{
       const projectRef = doc(this.firestore, `projects/${project.id}`);
-      updateDoc(projectRef, { ... project});
+     return updateDoc(projectRef, { ... project});
     }
     
-    deleteProject(id:string){
+    deleteProject(id:string): Promise<void>{
       const projectRef = doc(this.firestore, `projects/${id}`);
-      deleteDoc(projectRef);
+      return deleteDoc(projectRef);
     } 
 
 

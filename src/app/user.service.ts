@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import {collection, collectionData, doc, Firestore, setDoc, deleteDoc, updateDoc} from '@angular/fire/firestore';
+import {collection, collectionData, doc, query, where, docData, Firestore, setDoc, deleteDoc, updateDoc} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 
 
@@ -15,6 +15,8 @@ address: string,
 phonenum: string,
 userrole: string,
 
+salary?: number,
+position?: string,
 //foreign keys
 //company, groups and projects can be null
 companyid?: string,
@@ -43,21 +45,33 @@ export class UserService {
     return collectionData(this.usersCollection, ({idField: 'id'})) as Observable<User[]>
   }
 
-  addUser(newUser: User){
+  addUser(newUser: User):Promise<void>{
     const userRef = doc(this.usersCollection);
     newUser.id = userRef.id;
-    setDoc(userRef, newUser);
+    return setDoc(userRef, newUser);
   }
 
-  updateUser(user:User){
+  updateUser(user:User): Promise<void>{
     const userRef = doc(this.firestore, `users/${user.id}`);
-    updateDoc(userRef, { ... user});
+    return updateDoc(userRef, { ... user});
   }
   
-  deleteUser(id:string){
+  deleteUser(id:string):Promise<void>{
     const userRef = doc(this.firestore, `users/${id}`);
-    deleteDoc(userRef);
+    return deleteDoc(userRef);
   }
 
-  //constructor() { }
+  getUserById(id:string):Observable<User>{
+    const userDocRef = doc(this.firestore, 'users', id);
+    return docData(userDocRef, {idField: 'id'}) as Observable<User>;
+  }
+
+  getUsersByCompanyId(companyid: string): Observable<User[]> {
+    const q = query(
+      this.usersCollection,
+      where('companyid', '==', companyid)
+    );
+    return collectionData(q, { idField: 'id' }) as Observable<User[]>;
+  }
+  
 }
