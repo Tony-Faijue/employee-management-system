@@ -1,0 +1,52 @@
+<div class="container">
+  <nav class="navbar navbar-expand-LG navbar-dark bg-dark">
+    <div class="container-fluid">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/admin-profile', user.id]"
+              >My Admin Profile</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/manage-company', user.id]"
+              >Manage the Company</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/manage-groups', user.id]"
+              >Manage Company Groups</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/manage-project', user.id]"
+              >Manage Group Projects</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/manage-tasks', user.id]"
+              >Manage Project Tasks</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['manage-employees', user.id]"
+              >Manage Company Employees</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>

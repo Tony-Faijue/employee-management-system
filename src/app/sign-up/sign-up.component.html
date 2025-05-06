@@ -1,0 +1,115 @@
+<div class="container">
+  <div id="SignUpForm" class="container">
+    <h1>Create New Account</h1>
+
+    <div class="row">
+      <div class="mb-3 col-md-6">
+        <label for="fName">First Name*</label>
+        <input
+          type="text"
+          id="fName"
+          name="fName"
+          [(ngModel)]="employee.firstname"
+          placeholder="First Name"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="mb-3 col-md-6">
+        <label for="lName">Last Name*</label>
+        <input
+          type="text"
+          id="lName"
+          name="lName"
+          [(ngModel)]="employee.lastname"
+          placeholder="Last Name"
+          class="form-control"
+          required
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="mb-3 col-md-6">
+        <label for="username">UserName*</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          [(ngModel)]="employee.username"
+          placeholder="UserName"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="mb-3 col-md-6">
+        <label for="email">Email*</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="employee.email"
+          placeholder="youremail@example.com"
+          class="form-control"
+          required
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="mb-3 col-md-6">
+        <label for="password">Password*</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="employee.password"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="mb-3 col-md-6">
+        <label for="address">Address*</label>
+        <input
+          type="text"
+          id="address"
+          name="address"
+          [(ngModel)]="employee.address"
+          class="form-control"
+          required
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="mb-3 col-md-6">
+        <label for="phone">Phone*</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          [(ngModel)]="employee.phonenum"
+          placeholder="800-000-0000"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="mb-3 col-md-6">
+        <label for="userrole">User Role*</label>
+        <select
+          id="userrole"
+          name="userrole"
+          [(ngModel)]="employee.userrole"
+          class="form-control"
+          required
+        >
+          <option value="Employee" selected>Employee</option>
+          <option value="Admin">Admin</option>
+        </select>
+      </div>
+    </div>
+    <div class="mb-3 d-flex justify-content-end">
+      <button class="btn btn-success" (click)="signUp()" routerLink="/login">
+        Create New Account
+      </button>
+    </div>
+    <br />
+  </div>
+</div>

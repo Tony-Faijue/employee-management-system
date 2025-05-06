@@ -1,0 +1,199 @@
+<!--NavBar-->
+
+<div class="container">
+  <nav class="navbar navbar-expand-LG navbar-dark bg-dark">
+    <div class="container-fluid">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/admin-profile', currentUser.id]"
+              >My Admin Profile</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/manage-company', currentUser.id]"
+              >Manage the Company</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/manage-groups', currentUser.id]"
+              >Manage Company Groups</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/manage-project', currentUser.id]"
+              >Manage Group Projects</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/manage-tasks', currentUser.id]"
+              >Manage Project Tasks</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/manage-employees', currentUser.id]"
+              >Manage Company Employees</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div class="container my-5">
+  <h1 class="text-center">Manage Tasks</h1>
+
+  <!-- Tasks List -->
+  <div>
+    @if(tasks && tasks.length > 0){
+    <h2>Tasks List</h2>
+    @for(task of tasks; track task.id){
+    <div class="card p-3 mb-3">
+      <p>
+        <strong>#{{ $index + 1 }}</strong>
+      </p>
+      <p><strong>ID:</strong> {{ task.id }}</p>
+      <p><strong>Name:</strong> {{ task.taskname }}</p>
+      <p><strong>Description:</strong> {{ task.taskdesc }}</p>
+      <p><strong>Status:</strong> {{ task.status }}</p>
+      <p><strong>Project ID:</strong> {{ task.projectid }}</p>
+      <button class="btn btn-warning col-md-2" (click)="setSelectedTask(task)">
+        Edit
+      </button>
+      <br />
+      <button class="btn btn-danger col-md-2" (click)="deleteTask(task.id)">
+        Delete
+      </button>
+    </div>
+    }} @else{
+    <p>No tasks found for these projects.</p>
+    }
+  </div>
+  <hr />
+
+  <!-- Task Form Section -->
+  <!-- If a task is selected (i.e. selectedTask.id is not empty), show update form; otherwise, show add form. -->
+  @if(selectedTask && selectedTask.id){
+  <h2>Update Task</h2>
+  <form (ngSubmit)="updateTask()">
+    <div class="form-group mb-3">
+      <label for="taskNameUpdate">Task Name</label>
+      <input
+        type="text"
+        id="taskNameUpdate"
+        [(ngModel)]="selectedTask.taskname"
+        name="taskNameUpdate"
+        class="form-control"
+        required
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label for="taskDescUpdate">Task Description</label>
+      <input
+        type="text"
+        id="taskDescUpdate"
+        [(ngModel)]="selectedTask.taskdesc"
+        name="taskDescUpdate"
+        class="form-control"
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label for="statusUpdate">Status</label>
+      <input
+        type="text"
+        id="statusUpdate"
+        [(ngModel)]="selectedTask.status"
+        name="statusUpdate"
+        class="form-control"
+        required
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label for="projectSelectUpdate">Project</label>
+      <select
+        id="projectSelectUpdate"
+        class="form-control"
+        [(ngModel)]="selectedTask.projectid"
+        name="projectSelectUpdate"
+        required
+      >
+        @for(project of projects; track project.id){
+        <option [value]="project.id">
+          {{ project.projectname }}
+        </option>
+        }
+      </select>
+    </div>
+    <button type="submit" class="btn btn-success">Update Task</button>
+  </form>
+  }@else{
+
+  <h2>Add New Task</h2>
+  <form (ngSubmit)="addTask()">
+    <div class="form-group mb-3">
+      <label for="taskName">Task Name</label>
+      <input
+        type="text"
+        id="taskName"
+        [(ngModel)]="selectedTask.taskname"
+        name="taskName"
+        class="form-control"
+        required
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label for="taskDesc">Task Description</label>
+      <input
+        type="text"
+        id="taskDesc"
+        [(ngModel)]="selectedTask.taskdesc"
+        name="taskDesc"
+        class="form-control"
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label for="status">Status</label>
+      <select
+        id="status"
+        [(ngModel)]="selectedTask.status"
+        name="status"
+        class="form-control"
+        required
+      >
+        <option value="In Progress">In Progress</option>
+        <option value="Completed">Completed</option>
+      </select>
+    </div>
+    <div class="form-group mb-3">
+      <label for="projectSelect">Select Project</label>
+      <select
+        id="projectSelect"
+        class="form-control"
+        [(ngModel)]="selectedTask.projectid"
+        name="projectSelect"
+        required
+      >
+        @for(project of projects; track project.id){
+        <option [value]="project.id">
+          {{ project.projectname }}
+        </option>
+        }
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Task</button>
+  </form>
+  }
+</div>

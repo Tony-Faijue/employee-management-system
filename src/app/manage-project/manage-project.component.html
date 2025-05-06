@@ -1,0 +1,190 @@
+<!--NavBar-->
+
+<div class="container">
+  <nav class="navbar navbar-expand-LG navbar-dark bg-dark">
+    <div class="container-fluid">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/admin-profile', currentUser.id]"
+              >My Admin Profile</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/manage-company', currentUser.id]"
+              >Manage the Company</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/manage-groups', currentUser.id]"
+              >Manage Company Groups</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/manage-project', currentUser.id]"
+              >Manage Group Projects</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/manage-tasks', currentUser.id]"
+              >Manage Project Tasks</a
+            >
+          </div>
+          <div class="col-md-2">
+            <a
+              class="nav-item nav-link text-white"
+              [routerLink]="['/manage-employees', currentUser.id]"
+              >Manage Company Employees</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div class="container my-5">
+  <h1 class="text-center">Manage Projects</h1>
+
+  <!-- Projects List -->
+  <div>
+    @if(projects && projects.length > 0){
+    <h2>Projects List</h2>
+    @for(project of projects; track project.id){
+    <div class="card p-3 mb-3">
+      <p>
+        <strong>#{{ $index + 1 }}</strong>
+      </p>
+      <p><strong>ID:</strong> {{ project.id }}</p>
+      <p><strong>Name:</strong> {{ project.projectname }}</p>
+      <p><strong>Description:</strong> {{ project.projectdesc }}</p>
+      <p>
+        <strong>Group:</strong>
+        <!-- Optionally display the group name if you can cross-reference from the groups array -->
+        @for(group of groups; track group.id){
+        <span>
+          @if(group.id === project.groupid){
+          <span>{{ group.groupname }}</span
+          >}
+        </span>
+        }
+      </p>
+      <button
+        class="btn btn-warning col-md-2"
+        (click)="setSelectedProject(project)"
+      >
+        Edit
+      </button>
+      <br />
+      <button
+        class="btn btn-danger col-md-2"
+        (click)="deleteProject(project.id)"
+      >
+        Delete
+      </button>
+    </div>
+    } } @else{
+    <p>No projects found for these groups.</p>
+    }
+  </div>
+
+  <hr />
+
+  <!-- Group Form Section: Display update form if selectedProject.id exists, otherwise add form -->
+
+  @if(selectedProject && selectedProject.id){
+  <h2>Update Project</h2>
+  <form (ngSubmit)="updateProject()">
+    <div class="form-group mb-3">
+      <label for="projectNameUpdate">Project Name</label>
+      <input
+        type="text"
+        id="projectNameUpdate"
+        [(ngModel)]="selectedProject.projectname"
+        name="projectNameUpdate"
+        class="form-control"
+        required
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label for="projectDescUpdate">Project Description</label>
+      <input
+        type="text"
+        id="projectDescUpdate"
+        [(ngModel)]="selectedProject.projectdesc"
+        name="projectDescUpdate"
+        class="form-control"
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label for="groupSelectUpdate">Group</label>
+      <select
+        id="groupSelectUpdate"
+        class="form-control"
+        [(ngModel)]="selectedProject.groupid"
+        name="groupSelectUpdate"
+        required
+      >
+        @for(group of groups; track group.id){
+        <option [value]="group.id">
+          {{ group.groupname }}
+        </option>
+        }
+      </select>
+    </div>
+    <button type="submit" class="btn btn-success">Update Project</button>
+  </form>
+  }@else{
+  <h2>Add New Project</h2>
+  <form (ngSubmit)="addProject()">
+    <div class="form-group mb-3">
+      <label for="projectName">Project Name</label>
+      <input
+        type="text"
+        id="projectName"
+        [(ngModel)]="selectedProject.projectname"
+        name="projectName"
+        class="form-control"
+        required
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label for="projectDesc">Project Description</label>
+      <input
+        type="text"
+        id="projectDesc"
+        [(ngModel)]="selectedProject.projectdesc"
+        name="projectDesc"
+        class="form-control"
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label for="groupSelect">Select Group</label>
+      <select
+        id="groupSelect"
+        class="form-control"
+        [(ngModel)]="selectedProject.groupid"
+        name="groupSelect"
+        required
+      >
+        @for(group of groups; track group.id){
+        <option [value]="group.id">
+          {{ group.groupname }}
+        </option>
+        }
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Project</button>
+  </form>
+  }
+</div>
