@@ -1,45 +1,59 @@
-<div class="container">
-  <nav class="navbar navbar-expand-LG navbar-success bg-success">
-    <div class="container-fluid">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-2">
-            <a
-              class="nav-item nav-link text-white"
-              [routerLink]="['/employee-profile', user.id]"
-              >My Employee Profile</a
-            >
+<div class="container"><button type="button" class="btn btn-primary" (click)="joinCo(companyInput.value)">Join Company</button>
+<input type="text" #companyInput>
+</div>
+<div class="container my-3">
+  <div class="row my-3">
+    <div class="card text-bg-white p-5">
+      <h1 class="card-title">UserID: {{ user.id }}</h1>
+      <div class="card-body">
+        <p>Username: {{ user.username }}</p>
+        <p>First Name: {{ user.firstname }}</p>
+        <p>Last Name: {{ user.lastname }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Phone Number: {{ user.phonenum }}</p>
+        <p>Address: {{ user.address }}</p>
+        <p>Role: {{ user.userrole }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container my-3">
+    <div class="row my-3">
+      <div class="card text-bg-white p-5">
+        <h1 class="card-title">Company ID: {{ company.id }}</h1>
+        <div class="card-body">
+          <p>Company Name: {{ company.companyname }}</p>
+          <p>Company Address: {{ company.address }}</p>
+          <p>Company number: {{ company.phonenum }}</p>
+          @for(project of projects; track project.id){
+            <p>
+              <strong>Project #{{ $index + 1 }}</strong>
+            </p>
+            <div class = container>
+              <div class = "card" id="projectCard">
+              <p><strong>ID:</strong> {{ project.id }}</p>
+              <p><strong>Name:</strong> {{ project.projectname }}</p>
+              <p><strong>Description:</strong> {{ project.projectdesc }}</p>
+              @for(task of tasks; track task.id){
+                
+                @if(task.projectid==project.id){
+                  <p>
+                    <strong>Task:</strong>
+                  </p>
+                  <div class = container>
+                    <div class = "card">
+                  <p><strong>Task Name: </strong>{{task.taskname}}</p>
+                  <p><strong>Task Desc: </strong>{{task.taskdesc}}</p>
+                  <p><strong>Status: </strong>{{task.status}}</p>
+                    </div>
+                  </div>
+                }
+                }
+            </div>
           </div>
-          <div class="col-md-2">
-            <a
-              class="nav-item nav-link text-white"
-              [routerLink]="['/employee-profile', user.id]"
-              >My Company</a
-            >
-          </div>
-          <div class="col-md-2">
-            <a
-              class="nav-item nav-link text-white"
-              [routerLink]="['/employee-profile', user.id]"
-              >My Groups</a
-            >
-          </div>
-          <div class="col-md-2">
-            <a
-              class="nav-item nav-link text-white"
-              [routerLink]="['/employee-profile', user.id]"
-              >My Projects</a
-            >
-          </div>
-          <div class="col-md-2">
-            <a
-              class="nav-item nav-link text-white"
-              [routerLink]="['/employee-profile', user.id]"
-              >My Tasks</a
-            >
-          </div>
+          <p> </p>
+              }
         </div>
       </div>
     </div>
-  </nav>
-</div>
+  </div>
