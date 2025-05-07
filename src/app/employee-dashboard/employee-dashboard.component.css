@@ -1,0 +1,6 @@
+#projectCard{
+    background-color: gray;
+    color: white;
+    -webkit-text-stroke: 0.1px black;
+    padding: 5px;
+}
