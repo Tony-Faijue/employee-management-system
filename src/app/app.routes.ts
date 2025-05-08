@@ -5,7 +5,6 @@ import { PayStubComponent } from './pay-stub/pay-stub.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { AdminComponent } from './admin-login/admin-login.component';
 import { EmployeeInfoComponent } from './employee-info/employee-info.component';
-import { UserListComponent } from './user-list/user-list.component';
 import {SignUpComponent} from './sign-up/sign-up.component';
 import { LoginComponent } from './login/login.component';
 import { EmployeeDashboardComponent } from './employee-dashboard/employee-dashboard.component';
@@ -26,7 +25,6 @@ export const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'pay-stub', component: PayStubComponent },
   { path: 'schedule', component: ScheduleComponent },
-  {path: 'user-list', component: UserListComponent},
   {path: 'sign-up', component: SignUpComponent},
   {path: 'login', component: LoginComponent},
   {path: 'employee-dashboard/:userID', component: EmployeeDashboardComponent},
@@ -42,7 +40,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

@@ -73,5 +73,9 @@ export class UserService {
     );
     return collectionData(q, { idField: 'id' }) as Observable<User[]>;
   }
+
+  getTempIds(){
+    return Promise.resolve(['BIwy7OBkUdVpGP5kjmu7','MewqtcCVPfhIfJfjihtx']);
+  }
   
 }
